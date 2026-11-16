@@ -1,0 +1,11 @@
+# Confirmed implementation and saved results
+
+Paths are relative to the repository root. Review performed 2026-11-09.
+
+- `random_assembly_simulation_fit/replicator_fit_benchmark/replicator_fit_benchmark.py` states the logistic-plus-boost ODE. `transform_for(np.inf)` sets K = exp(q1), tau = 0.1 + exp(q3), and leaves mu/A signed. Group 6 uses `W_TAU = (0, 0, 1, 1)`. `LAMS` includes 0.1; `data/pooled_summary.csv` has the group-6/lambda-0.1 row for 7,174 trajectories. The findings recommend this setting. The benchmark also tests five other groups and five lambda values, and `logistic_fit_benchmark.py` is a separate plain-logistic, unpenalized baseline. Therefore the requested fit was used here, but not for every analysis in the folder (which also includes SINDy and embedding work).
+- `dynamic_regime/amean_sweep/fit_sweep.py` explicitly imports the benchmark and sets `LAM = 0.1`, `TAU_HI = np.inf`, and `W_TAU`. `fit_window` calls `L.make_lm`, `fit_best`, and `starts_xi`. Saved `data/cells/theta_amean0.30_shared_241h.json` records lambda 0.1, unbounded tau, and weights [0,0,1,1]. Headline fits use 241 hourly observations over 10 days.
+- `dynamic_regime/antibiotic_perturbation/fit_trajectories.py` also uses the same imports, `LAM = .1`, and `W_TAU` for the post-removal window. Saved `cases/mortality_1/data/fit_metadata.json` confirms the exact smoothed objective, three starts, 200 iterations, and boost clock reset at removal. The differential-equation simulation modules elsewhere in `dynamic_regime` generate the data; they are not themselves this fitted reduction.
+
+Shared numerical core: `random_assembly_simulation_fit/replicator_fit_benchmark/replicator_lib.py` supplies float64 JAX, RK4 with 0.1 h steps, clipping to [-5,5], smoothed |A| with epsilon 1e-4, and LM. The optional `simulate_fn` argument of `make_lm` allows the skill to use actual irregular observation times while leaving the default hourly behavior intact. The skill's adapter uses RK4 steps no larger than 0.1 h, with the same RHS and clipping. It does not interpolate observations.
+
+Penalty transfer requires consistent hours and abundance treatment. The benchmark recommendation is empirical, from these simulated trajectories. Keep lambda 0.1 as the requested default; report horizon/sampling limitations rather than claiming it is optimal for a new dataset.

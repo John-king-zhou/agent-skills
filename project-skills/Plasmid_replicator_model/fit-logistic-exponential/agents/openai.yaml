@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fit Logistic + Exponential"
+  short_description: "Fit selected trajectories with the repo model"
+  default_prompt: "Use $fit-logistic-exponential to fit my selected dataset with lambda 0.1."

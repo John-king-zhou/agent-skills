@@ -10,6 +10,7 @@ skills from `~/.claude/skills`. Other agents read them from `~/.agents/skills`.
 |---|---|
 | `skills/` | Global skills. One folder per skill. |
 | `project-skills/MicroGen/` | Skills for the MicroGen project only. Not installed globally. |
+| `project-skills/Plasmid_replicator_model/` | Skills for the plasmid replicator model project only. Not installed globally. |
 | `install.sh` | Links every folder in `skills/` into the agent skill folders. |
 
 ## Skills
@@ -30,9 +31,10 @@ Skills from other authors (see each folder for its license):
 - **math-reasoning**: Math derivations and proofs for papers.
 - **scientific-writing**: Drafts and audits of scientific manuscripts.
 
-Project skill:
+Project skills:
 
 - **MicroGen/progress-review**: Summary of one part of the MicroGen project, with next steps. Copy it into the project at `.claude/skills/progress-review`.
+- **Plasmid_replicator_model/fit-logistic-exponential**: Fit selected plasmid or gene abundance time series with the project's logistic plus exponential boost model, or pure logistic when requested. Copy the full folder into the project at `.agents/skills/fit-logistic-exponential`. It requires the project's benchmark code and the `replicator-jax` environment. Use a copy because the helper resolves the project root from its own file location.
 
 ## Set up a new machine
 
