@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "convert-md-to-pdf",
+  "owner": "digital-stoic-org",
+  "repo": "agent-skills",
+  "path": "convert/skills/convert-md-to-pdf",
+  "branch": "main",
+  "sha": "810484ba589a69ba4bb984170f6e1f0100aff74f",
+  "source": "manual"
+}
